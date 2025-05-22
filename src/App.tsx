@@ -1,6 +1,7 @@
 import DataUserSection from "./sections/DataUserSection";
 import HeaderView from "./sections/HeaderSection";
 import SalarySection from "./sections/SalarySection";
+import UtilsButtonsSection from "./sections/UtilsButtonsSection";
 
 export default function App() {
   return (
@@ -18,7 +19,7 @@ export default function App() {
         <div className="bg-yellow-200 w-full text-center">5<br /> <br /> <br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br /> <br /> <br /><br /><br /><br /><br /> aa</div>
 
         {/* 6 se coloca solo en la siguiente fila */}
-        <div className="col-start-2 bg-purple-200 w-full text-center">6</div>
+        <UtilsButtonsSection />
       </div>
     </div>
   );

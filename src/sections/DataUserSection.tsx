@@ -32,7 +32,7 @@ export default function DataUserSection() {
           <span className="text-sky-600 text-lg">Seleccione el periodo</span>
           <div className="flex">
 
-            <div className="flex gap-2">
+            <div className="flex gap-10 pt-2">
               <InputBoton text={"Mensual"} />
               <InputBoton text={"Quincenal"} />
               <InputBoton text={"Semanal"} />
@@ -42,7 +42,7 @@ export default function DataUserSection() {
           </div>
 
           <span className="text-sky-600 text-lg">Seleccione el periodo</span>
-          <div className="flex">
+          <div className="flex pt-2">
 
             <div className="flex gap-2 ju stify-center items-center">
               <div>
