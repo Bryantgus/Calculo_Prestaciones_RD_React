@@ -16,11 +16,11 @@ function salarySection(salary: Record<string, number>, periodo: string, tipoDeCa
       quincenal: promedioMensual: cantidad de meses / 2
       semanal: promedioMensual: cantidad de meses / 4.3333
                promedioDiario: 23.83
-      diario: promedioMensual: 0.25178 23.83
+      diario: promedioMensual:  23.83
               promedioDiario: cantidad de meses
 
     */
-    const valorParaTipoDeCalculo = tipoDeCalculo === 'ordinario' ? 23.829 : 26
+    const valorParaTipoDeCalculo = tipoDeCalculo === 'ordinario' ? 23.83 : 26
     const valorPeriodoParaCalcularSalarioPromedioMensualDiario: Record<string, SalarioPromedio> = {
     'mensual': {
       valorSalarioPromedioMensual: Object.keys(salary).length,
@@ -45,7 +45,7 @@ function salarySection(salary: Record<string, number>, periodo: string, tipoDeCa
     return {
         sumatoriaDeSalarios: sumAllSalary, 
         salarioPromedioMensual: sumAllSalary / mensual,
-        salarioPromedioDiario: periodo === 'diario' ? sumAllSalary / diario : (sumAllSalary / mensual) / diario
+        salarioPromedioDiario: periodo === 'diario' ? sumAllSalary / 12 : (sumAllSalary / mensual) / diario
     }
 }
 
@@ -79,7 +79,6 @@ function cesantia(years: number, months: number, salarioPromedioDiario: number) 
     
   */
   let diasCesantia = 0
-  console.log("years", years);
   
   if (years >= 5) {
     diasCesantia += (years-5) * 23
@@ -116,39 +115,38 @@ function vacaciones(years: number, months: number, salarioPromedioDiario: number
       false => dias => 14 
   */
   let diasVacaciones = 0
-      
-  const vacacionesObject: Record<string, number> = {
-    5: 6,
-    6: 7,
-    7: 8,
-    8: 9,
-    9: 10,
-    10: 11,
-    11: 12
-  }
 
   if (years > 0 && !tomoVacaciones) diasVacaciones = 14
-  if (tomoVacaciones && months > 4) diasVacaciones = vacacionesObject[months]
+  if (tomoVacaciones && months > 4) diasVacaciones = months + 1
 
   const vacaciones = diasVacaciones * salarioPromedioDiario
   
-
   return { vacaciones, diasVacaciones }
-  
-
 }
 
+function navidad(monthsCurrentlyYear: number, days: number, salario: number) {
+  /*
+    tiempo de navidad
+    tiempoEnMesesTotal = (months -1)  + (dias/31)
+    navidad = (tiempoEnMeseTotal * salarioPromedioMensual) / 12
+  */ 
+  const navidad = (((monthsCurrentlyYear - 1) + (days / 31)) * salario) / 12
+  
+  return {navidad, tiempoNavidad: monthsCurrentlyYear + " meses y " + days + " dias"}
+}
 function calcularPrestaciones(datos: DatosDelUsuario) {
-    const { salariosMensuales, tiempoTrabajando: { years, months, days}, periodo, tipoDeCalculo, tomoVacaciones} = datos
+    const { salariosMensuales, tiempoTrabajando: { years, months, monthsCurrentlyYear, daysCurrentlyMonth}, periodo, tipoDeCalculo, tomoVacaciones} = datos
     const salariesCalculates = salarySection(salariosMensuales, periodo, tipoDeCalculo)
-
     const preavisoResult = preAviso(years, months, salariesCalculates.salarioPromedioDiario)
     const cesantiaResult = cesantia(years, months, salariesCalculates.salarioPromedioDiario)
     const vacacionesResult = vacaciones(years, months, salariesCalculates.salarioPromedioDiario, tomoVacaciones)
+    const navidadResult = navidad(monthsCurrentlyYear, daysCurrentlyMonth, salariesCalculates.salarioPromedioMensual)
+    
+    console.log("Salarios", salariesCalculates);
     console.log("Creaviso", preavisoResult);
     console.log("Cesantia", cesantiaResult);
     console.log("Vacaciones", vacacionesResult);
-    
+    console.log("Navidad", navidadResult);
 
 }
 

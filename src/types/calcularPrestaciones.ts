@@ -3,6 +3,8 @@ export type DatosDelUsuario = {
     days: number;
     months: number;
     years: number;
+    monthsCurrentlyYear: number,
+    daysCurrentlyMonth: number
   };
   salariosMensuales: Record<string, number>,
   periodo: string,

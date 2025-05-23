@@ -5,25 +5,27 @@ import type { DatosDelUsuario } from '../types/calcularPrestaciones';
 export default function UtilsButtonsSection() {
   const datosParaCalcular: DatosDelUsuario = {
     tiempoTrabajando: {
-      days: 10,
-      months: 11,
-      years: 1
+      years: 4,
+      months: 6,
+      days: 28,
+      monthsCurrentlyYear: 11,
+      daysCurrentlyMonth: 19
     },
     salariosMensuales: {
       1: 10000,
       2: 10000,
       3: 10000,
       4: 10000,
-      5: 10000,     
+      5: 15000,     
       6: 10000, 
       7: 10000,
       8: 10000,
       9: 10000,
       10: 10000,
       11: 10000,
-      // 12: 10000,
+      12: 12000,
     },
-    periodo: 'mensual',
+    periodo: 'semanal',
     tipoDeCalculo: 'ordinario',
     tomoVacaciones: false,
   };
