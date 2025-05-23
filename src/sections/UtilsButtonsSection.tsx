@@ -6,8 +6,8 @@ export default function UtilsButtonsSection() {
   const datosParaCalcular: DatosDelUsuario = {
     tiempoTrabajando: {
       days: 10,
-      months: 0,
-      years: 7
+      months: 11,
+      years: 1
     },
     salariosMensuales: {
       1: 10000,
@@ -17,14 +17,15 @@ export default function UtilsButtonsSection() {
       5: 10000,     
       6: 10000, 
       7: 10000,
-      // 8: 10000,
-      // 9: 10000,
-      // 10: 10000,
-      // 11: 10000,
+      8: 10000,
+      9: 10000,
+      10: 10000,
+      11: 10000,
       // 12: 10000,
     },
     periodo: 'mensual',
     tipoDeCalculo: 'ordinario',
+    tomoVacaciones: false,
   };
 
 

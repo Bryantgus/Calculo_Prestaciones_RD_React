@@ -6,7 +6,8 @@ export type DatosDelUsuario = {
   };
   salariosMensuales: Record<string, number>,
   periodo: string,
-  tipoDeCalculo: string
+  tipoDeCalculo: string,
+  tomoVacaciones: boolean
 };
 
 export type DatosDePrestacionesYaCalculadas = {

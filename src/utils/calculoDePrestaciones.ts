@@ -79,14 +79,14 @@ function cesantia(years: number, months: number, salarioPromedioDiario: number) 
     
   */
   let diasCesantia = 0
-  if (years >= 10) {
-    diasCesantia = 10
-  }
-  if (years > 5) {
+  console.log("years", years);
+  
+  if (years >= 5) {
     diasCesantia += (years-5) * 23
     diasCesantia += (21 * 5)
+    diasCesantia += 10
   }
-  if (years > 0 && years < 6 ) {
+  if (years > 0 && years < 5 ) {
     diasCesantia = 21 * years
   }
 
@@ -100,14 +100,54 @@ function cesantia(years: number, months: number, salarioPromedioDiario: number) 
 
 }
 
+function vacaciones(years: number, months: number, salarioPromedioDiario: number, tomoVacaciones: boolean) {
+  /*
+   si years mayor que 0 entonces
+      tomoVacaciones => 
+      true => dias => 
+        5 meses => 6 dias
+        6 meses => 7 dias 
+        7 meses => 8 dias 
+        8 meses => 9 dias 
+        9 meses => 10 dias 
+        10 meses => 11 dias 
+        11 meses => 12 dias
+
+      false => dias => 14 
+  */
+  let diasVacaciones = 0
+      
+  const vacacionesObject: Record<string, number> = {
+    5: 6,
+    6: 7,
+    7: 8,
+    8: 9,
+    9: 10,
+    10: 11,
+    11: 12
+  }
+
+  if (years > 0 && !tomoVacaciones) diasVacaciones = 14
+  if (tomoVacaciones && months > 4) diasVacaciones = vacacionesObject[months]
+
+  const vacaciones = diasVacaciones * salarioPromedioDiario
+  
+
+  return { vacaciones, diasVacaciones }
+  
+
+}
+
 function calcularPrestaciones(datos: DatosDelUsuario) {
-    const { salariosMensuales, tiempoTrabajando: { years, months, days}, periodo, tipoDeCalculo} = datos
+    const { salariosMensuales, tiempoTrabajando: { years, months, days}, periodo, tipoDeCalculo, tomoVacaciones} = datos
     const salariesCalculates = salarySection(salariosMensuales, periodo, tipoDeCalculo)
 
     const preavisoResult = preAviso(years, months, salariesCalculates.salarioPromedioDiario)
     const cesantiaResult = cesantia(years, months, salariesCalculates.salarioPromedioDiario)
-    console.log("preaviso", preavisoResult);
-    console.log("cesantia", cesantiaResult);
+    const vacacionesResult = vacaciones(years, months, salariesCalculates.salarioPromedioDiario, tomoVacaciones)
+    console.log("Creaviso", preavisoResult);
+    console.log("Cesantia", cesantiaResult);
+    console.log("Vacaciones", vacacionesResult);
     
 
 }
